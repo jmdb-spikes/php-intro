@@ -17,9 +17,9 @@ Go to System Preferences --> Service --> WebSharing
 
 You should be able to navigate to:
 
-...
-http://localhost/
-...
+
+`http://localhost/`
+
 
 Should display your apache home page.
 
