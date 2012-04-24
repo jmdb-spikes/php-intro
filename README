@@ -9,15 +9,17 @@ It is currently os x specific.
 1.Install PHP:
 ===============
 
-To run this demo you need apache installed. 
+To run this demo you need apache installed.
 
-If you are on OS X you are in luck. Apache is already installed. 
+If you are on OS X you are in luck. Apache is already installed.
 
 Go to System Preferences --> Service --> WebSharing
 
 You should be able to navigate to:
 
+...
 http://localhost/
+...
 
 Should display your apache home page.
 
@@ -68,11 +70,11 @@ e.g. index.php
 	</head>
 
 	<body>
-		
+
 		<h1>Hello!</h1>
-		
+
 		<p>Today's date is: <? print(Date("1 F d, Y")); ?></p>
-		
+
 		<ul>
 			<li><a href="./php-introduction/">An introduction to PHP</a></li>
 		</ul>
@@ -107,7 +109,7 @@ deploy.server.local.webroot.dir=/Users/foobaz/Sites
 
 
 
-  
+
 
 
 
