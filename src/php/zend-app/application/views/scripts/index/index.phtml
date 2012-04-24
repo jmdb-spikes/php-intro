@@ -1,0 +1,19 @@
+<html>
+<head>
+ <title><?php echo $this->escape($this->title); ?></title>
+</head>
+<body>
+ <h1><?php echo $this->escape($this->title); ?></h1>
+
+<p>This is a dmeo app for some cool php trickery!</p>
+ <p>Here is a link to a "rest" controller which uses the default zend rest 
+	server where method is passed as a parameter in uri - 
+	<a href="<?php echo $this->baseUri ?>/zend-rest/?method=sayHello&who=jim&when=today"><?php echo $this->baseUri ?>/zend-rest/?method=sayHello&who=jim&when=today</a></p>
+		
+<p>What we want is a "rest" controller that can interpret ids from a uri,
+	eg. <code>/zend-rest-mkII/sayHello/jim/today</code></p>
+	<p>Which would involve some kind of pattern like <code>/zend-rest-mkII/sayHello/${who}/${when}</code></p>
+	<a href="<?php echo $this->baseUri ?>/zend-rest-mkII/sayHello/jim/today"><?php echo $this->baseUri ?>/zend-rest-mkII/sayHello/jim/today</a></p>
+</body>
+</html>
+

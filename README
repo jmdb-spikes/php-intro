@@ -1,0 +1,113 @@
+Welcome to php-introduction.
+
+
+This file contains 2 sections 1. Install PHP and 2. Install the app
+
+It is currently os x specific.
+
+
+1.Install PHP:
+===============
+
+To run this demo you need apache installed. 
+
+If you are on OS X you are in luck. Apache is already installed. 
+
+Go to System Preferences --> Service --> WebSharing
+
+You should be able to navigate to:
+
+http://localhost/
+
+Should display your apache home page.
+
+http://localhost/~${username} , e.g. http://localhost/~foo if i log in as "foo"
+
+You should see "Welcome to your site" or somesuch.
+
+You can now add content to :
+
+/Users/foo/Sites/
+
+Next thing is to enable php, which should already be on os x. (can proove by typing php --version at command line)
+
+should be about 5.5.5 or greater.
+
+You then need to edit
+
+sudo vi /private/etc/apache2/httpd.conf
+
+(make sure you are sudo-ing)
+
+/php to search for the line:
+
+#LoadModule php5_module        libexec/apache2/libphp5.so
+
+'i' to insert then delete the '#' to uncomment this line.
+
+Then go back to System Preferences --> Service --> WebSharing and uncheck the tick box. wait 1 sec.
+
+You can now replace your /Users/foo/Sites/index.html with index.php
+
+(example file below)
+
+Now if you return to http://localhost/~foo you should see todays date! and NOT lots of php errors.
+
+
+
+
+e.g. index.php
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>My Homepage</title>
+	</head>
+
+	<body>
+		
+		<h1>Hello!</h1>
+		
+		<p>Today's date is: <? print(Date("1 F d, Y")); ?></p>
+		
+		<ul>
+			<li><a href="./php-introduction/">An introduction to PHP</a></li>
+		</ul>
+	</body>
+
+</html>
+
+2. Install the app
+==================
+You first need to execute "chmod +x go" under php-introduction directory to make "go" command be executable.
+
+You can make bash include pwd in path, execute "sudo vi ~/.bash_profile", add "PATH=.:$PATH export PATH", execute ". ~/.bash_profile"
+
+Then you can check the property values by executing "go report.config".
+
+Secondly, you need to create a machine property file which will tell the build where to put the output (i.e. where your 'sites' directory is).
+
+You should be able to get your machine name from the above property values.
+
+If its a dodgy name you can set it to something sensible with 'hostname foobaz'
+
+then go into src/build
+
+and create "build.foobaz.properties"
+
+you can copy one of the ones that is there.
+
+the main property that needs to be present is:
+
+deploy.server.local.webroot.dir=/Users/foobaz/Sites
+
+
+
+
+  
+
+
+

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="php-introduction" default="all">
+	
+    <property name="base.dir" value="${basedir}"/>
+    <property name="src.dir" value="${base.dir}/src"/>
+	<property name="lib.dir" value="${base.dir}/lib" />
+	<property name="target.dir" value="${base.dir}/target"/>
+
+	<property name="src.build.dir" value="${src.dir}/build" />
+	<property name="src.resource.dir" value="${src.dir}/resource" />
+	
+	<!-- Machine specific properties (you need to pass in "hostname" as a parameter, e.g. -Dhostname=foobaz) -->
+	<property name="local.machine.config" value="${src.build.dir}/build.${hostname}.properties"/>
+	<property file="${local.machine.config}" />
+	<property file="${src.resource.dir}/application.properties" />
+
+
+    <!-- Compiler options -->
+    <patternset id="ignored.files">
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.svn/**"/>
+    </patternset>
+
+
+
+    <!-- Source directories -->
+
+    <property name="src.php.dir" value="${src.dir}/php"/>
+
+    <!-- Lib directories -->
+    
+    <property name="lib.zend.zip" value="${lib.dir}/Zend-1.8.zip"/>
+
+    <!-- Resource directories -->
+    <property name="resource.dir" value="${src.dir}/resource" />
+    <property name="resource.application.properties" value="${resource.dir}/php-introduction.properties" />
+
+    <!-- Target directories -->
+    
+    <property name="target.application.dir" value="${target.dir}/webapp"/>
+
+    <!-- Distribution Directories -->
+
+    <!-- Deploy Directories -->
+    <property name="deploy.server.local.application.dir" value="${deploy.server.local.webroot.dir}/${application.name}" />
+    <property name="deploy.server.local.lib.dir" value="${deploy.server.local.webroot.dir}/lib" />
+    <property name="deploy.server.local.lib.zend.dir" value="${deploy.server.local.lib.dir}/Zend" />
+
+    <target name="all" depends="report.config, clean, build, deploy-local"
+	        description="--> cleans, builds and deploys the app to your local apache server"/>
+
+	<target name="report.config" description="--> tells you what local config settings are in play">
+		<echo message="application.name                = ${application.name}" />
+		<echo message="application.distnumber          = ${application.distnumber}" />
+		<echo message="local.machine.config            = ${local.machine.config}" />
+		<echo message="deploy.server.local.webroot.dir = ${deploy.server.local.webroot.dir}" />
+		<echo message="hostname                        = ${hostname}" />
+		
+	</target>
+	
+    <target name="clean">
+        <delete dir="${target.dir}"/>
+        <mkdir dir="${target.dir}"/>
+    </target>
+
+    <target name="increment-buildnumber">
+        <propertyfile file="${resource.application.properties}">
+            <entry key="application.lastdistributed" type="date" default="now" pattern="HH.mm dd-MM-yyyy"/>
+            <entry key="application.distnumber" type="int" default="0000" operation="+" pattern="0000"/>
+        </propertyfile>
+
+    </target>
+
+    <target name="build">
+            <mkdir dir="${target.application.dir}" />
+            <copy todir="${target.application.dir}">
+                <fileset dir="${src.php.dir}" includes="**/*.*"/>
+                <fileset dir="${resource.dir}" includes="**/*.*"/>
+            </copy>
+
+    </target>
+
+    <target name="deploy-local">
+        <delete dir="${deploy.server.local.application.dir}" />
+        <mkdir dir="${deploy.server.local.application.dir}" />
+        <copy todir="${deploy.server.local.application.dir}">
+            <fileset dir="${target.application.dir}" includes="**/*.*"/>
+        </copy>
+
+    </target>
+
+    <target name="install.zend.local" description="--> installs the zend framework to your local apache">
+        <delete dir="${deploy.server.local.lib.zend.dir}" />
+        <mkdir dir="${deploy.server.local.lib.zend.dir}" />
+        <unzip dest="${deploy.server.local.lib.zend.dir}" src="${lib.zend.zip}" />
+    </target>
+
+</project>

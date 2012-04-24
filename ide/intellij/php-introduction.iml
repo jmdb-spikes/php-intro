@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="true" type="PHP" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <content url="file://$MODULE_DIR$/../.." />
+    <orderEntry type="jdk" jdkName="PHP" jdkType="PHP SDK Type" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntryProperties />
+  </component>
+  <component name="RSpecModuleSettingsStorage">
+    <RSPEC_MODULE_SETTINGS_STORAGE_ID NAME="RSPEC_SUPPORT_TYPE" VALUE="NONE" />
+  </component>
+</module>
+
